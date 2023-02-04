@@ -26,4 +26,5 @@ body {
     border: 1px solid grey;
     grid-column: 1 / -1;
     margin-bottom: 10px;
+    border-radius: 20px;
 }

@@ -19,7 +19,7 @@ const operate = function (num1, num2, operator) {
         return add(num1, num2)
     } else if (operator === '-') {
         return subtract(num1, num2)
-    } else if (operator === '*') {
+    } else if (operator === 'x') {
         return multiply(num1, num2)
     } else if (operator === '/') {
         return divide(num1, num2)
@@ -28,26 +28,55 @@ const operate = function (num1, num2, operator) {
     }
 }
 
+let displayValue;
+let displayPrevious;
+let lastValue;
+let operatorValue;
+
 const createGrid = function () {
     let container = document.querySelector('.buttonContainer');  
-    let operators = ['+', '-', 'x', '/'];
+    let operatorsGrid = ['+', '-', 'x', '/'];
     let extras = ['pow', 'C', 'del', '+/-', '0', '.', '='];
     let j = 1;
     for (let i = 1; i <= 20; i++) {
         let square = document.createElement('div');
         square.classList.add('square');
         if (i <= 4) {
-            square.textContent = operators.shift();
+            square.textContent = operatorsGrid.shift();
         } else if ((i <= 16) && (i%4 !== 0)) {
             square.textContent = `${j}`;
             j += 1;
         } else {
             square.textContent = extras.shift();
         }
+        square.addEventListener('click', buttonClick)
         container.appendChild(square);
     }
 }
 
+const buttonClick = function () {
+    let operatorsClick = ['+', '-', 'x', '/', 'pow'];
+    console.log(Number(this.textContent))
+    if (isNaN(Number(this.textContent)) !== true) {
+        if (displayValue === undefined) {
+            displayValue = this.textContent;
+            lastValue = 'number'
+        } else if (lastValue === 'number') {
+            displayValue = displayValue + this.textContent;
+        } else if (lastValue === 'operator') {
+            displayPrevious = displayValue;
+            displayValue = this.textContent;
+            lastValue = 'number';
+        }
+    } else if (operatorsClick.some(operator => operator === this.textContent)) {
+        operatorValue = this.textContent;
+        lastValue = 'operator'
+    } else if (this.textContent === '=') {
+        displayValue = operate(Number(displayPrevious), Number(displayValue), operatorValue);
+    }
+    let display = document.querySelector('.screen');
+    display.textContent = displayValue;
+    }
+
 createGrid();
 
-//test commits working
