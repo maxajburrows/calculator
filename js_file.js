@@ -34,10 +34,10 @@ const operate = function (num1, num2, operator) {
     }
 }
 
-let displayValue;
-let displayPrevious;
-let lastValue;
-let operatorValue;
+let displayValue = '';
+let displayPrevious = '';
+let lastValue = '';
+let operatorValue = '';
 
 const createGrid = function () {
     let container = document.querySelector('.buttonContainer');  
@@ -64,7 +64,7 @@ const buttonClick = function () {
     let operatorsClick = ['+', '-', 'x', '/', 'pow'];
     console.log(Number(this.textContent))
     if (isNaN(Number(this.textContent)) !== true) {
-        if (displayValue === undefined) {
+        if (displayValue === '') {
             displayValue = this.textContent;
             lastValue = 'number'
         } else if (lastValue === 'number') {
@@ -81,6 +81,12 @@ const buttonClick = function () {
         let temp = displayValue;
         displayValue = operate(Number(displayPrevious), Number(displayValue), operatorValue);
         displayPrevious = temp;
+    } else if (this.textContent = 'C') {
+        displayValue = '';
+        displayPrevious = '';
+        lastValue = '';
+        operatorValue = '';
+        console.log(displayValue);
     }
     let display = document.querySelector('.screen');
     display.textContent = displayValue;
