@@ -84,11 +84,14 @@ const buttonClick = function () {
             displayValue = operate(Number(displayPrevious), Number(displayValue), operatorValue);
             lastValue = 'equal';
         }
-    } else if (this.textContent = 'C') {
+    } else if (this.textContent === 'C') {
         displayValue = '';
         displayPrevious = '';
         lastValue = '';
         operatorValue = '';
+    } else if (this.textContent === 'del') {
+        displayValue = String(displayValue).slice(0,-1);
+        console.log(displayValue);
     }
     let display = document.querySelector('.screen');
     display.textContent = displayValue;
