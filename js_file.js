@@ -78,9 +78,10 @@ const buttonClick = function () {
         operatorValue = this.textContent;
         lastValue = 'operator'
     } else if (this.textContent === '=') {
-        let temp = displayValue;
-        displayValue = operate(Number(displayPrevious), Number(displayValue), operatorValue);
-        displayPrevious = temp;
+        if (lastValue !== 'equal') {
+            displayValue = operate(Number(displayPrevious), Number(displayValue), operatorValue);
+            lastValue = 'equal';
+        }
     } else if (this.textContent = 'C') {
         displayValue = '';
         displayPrevious = '';
