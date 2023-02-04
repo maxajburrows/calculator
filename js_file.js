@@ -75,10 +75,13 @@ const buttonClick = function () {
             lastValue = 'number';
         }
     } else if (operatorsClick.some(operator => operator === this.textContent)) {
+        if (displayValue !== '' && displayPrevious !== '' && operatorValue !== '' && lastValue === 'number') {
+            displayValue = operate(Number(displayPrevious), Number(displayValue), operatorValue)
+        }
         operatorValue = this.textContent;
         lastValue = 'operator'
     } else if (this.textContent === '=') {
-        if (lastValue !== 'equal') {
+        if (lastValue == 'number') {
             displayValue = operate(Number(displayPrevious), Number(displayValue), operatorValue);
             lastValue = 'equal';
         }
