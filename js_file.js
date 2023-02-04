@@ -72,8 +72,12 @@ const buttonClick = function () {
             displayPrevious = displayValue;
             displayValue = this.textContent;
             lastValue = 'number';
+        } else if (lastValue === 'equal') {
+            displayPrevious = '';
+            displayValue = this.textContent;
+            lastValue = 'number';
         }
-    } else if (operatorsClick.some(operator => operator === this.textContent)) {
+    } else if (operatorsClick.some(operator => operator === this.textContent) && lastValue !== 'del') {
         if (displayValue !== '' && displayPrevious !== '' && operatorValue !== '' && lastValue === 'number') {
             displayValue = operate(Number(displayPrevious), Number(displayValue), operatorValue)
         }
@@ -92,6 +96,9 @@ const buttonClick = function () {
     } else if (this.textContent === 'del') {
         displayValue = String(displayValue).slice(0,-1);
         console.log(displayValue);
+        if (displayValue === '') {
+            lastValue = 'del';
+        }
     }
     let display = document.querySelector('.screen');
     display.textContent = displayValue;
