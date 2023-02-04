@@ -65,7 +65,7 @@ const buttonClick = function () {
     if (isNaN(Number(this.textContent)) !== true) {
         if (displayValue === '') {
             displayValue = this.textContent;
-            lastValue = 'number'
+            lastValue = 'number';
         } else if (lastValue === 'number') {
             displayValue = displayValue + this.textContent;
         } else if (lastValue === 'operator') {
@@ -77,14 +77,19 @@ const buttonClick = function () {
             displayValue = this.textContent;
             lastValue = 'number';
         }
-    } else if (operatorsClick.some(operator => operator === this.textContent) && lastValue !== 'del') {
-        if (displayValue !== '' && displayPrevious !== '' && operatorValue !== '' && lastValue === 'number') {
+    } else if (operatorsClick.some(operator => operator === this.textContent)) {
+        if (lastValue === 'del') {
+            displayPrevious = '';
+        } else if (displayValue !== '' && displayPrevious !== '' && operatorValue !== '' && lastValue === 'number') {
             displayValue = operate(Number(displayPrevious), Number(displayValue), operatorValue)
         }
         operatorValue = this.textContent;
         lastValue = 'operator'
     } else if (this.textContent === '=') {
-        if (lastValue == 'number') {
+        if (lastValue === 'del') {
+            displayPrevious = '';
+        }
+        else if (lastValue === 'number') {
             displayValue = operate(Number(displayPrevious), Number(displayValue), operatorValue);
             lastValue = 'equal';
         }
