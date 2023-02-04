@@ -62,7 +62,6 @@ const createGrid = function () {
 
 const buttonClick = function () {
     let operatorsClick = ['+', '-', 'x', '/', 'pow'];
-    console.log(Number(this.textContent))
     if (isNaN(Number(this.textContent)) !== true) {
         if (displayValue === '') {
             displayValue = this.textContent;
@@ -90,7 +89,6 @@ const buttonClick = function () {
         displayPrevious = '';
         lastValue = '';
         operatorValue = '';
-        console.log(displayValue);
     }
     let display = document.querySelector('.screen');
     display.textContent = displayValue;
