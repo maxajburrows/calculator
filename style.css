@@ -1,0 +1,27 @@
+body {
+    display: grid;
+    place-items: center;
+}
+
+.buttonContainer {
+    display: grid;
+    grid-template: 1.5fr repeat(5, 1fr) / repeat(4, 1fr);
+    gap: 10px;
+    width: clamp(300px, 30%, 800px);
+    aspect-ratio: 1/ 1;
+    padding: 10px;
+    border: 2px solid black;
+    box-shadow: 0px 0px 3px 3px rgb(226, 226, 226);
+}
+
+.square {
+    text-align: center;
+    background-color: rgb(226, 226, 226);
+    display: grid;
+    place-items: center;
+}
+
+.screen {
+    border: 1px solid grey;
+    grid-column: 1 / -1;
+}
